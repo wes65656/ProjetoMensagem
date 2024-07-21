@@ -122,7 +122,7 @@ class Program
         Console.Clear();
         Console.WriteLine("Envie sua mensagem anônima:");
         string mensagem = Console.ReadLine();
-        bancoDeDados.AdicionarMensagem(mensagem);
+        bancoDeDados.AdicionarMensagem(usuarioLogado.Id, mensagem);
         Console.WriteLine("Mensagem enviada com sucesso!");
         Console.WriteLine("Pressione qualquer tecla para voltar ao menu.");
         Console.ReadKey();

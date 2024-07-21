@@ -11,13 +11,14 @@ public class BancoDeDados
         _connectionString = connectionString;
     }
 
-    public void AdicionarMensagem(string conteudo)
+    public void AdicionarMensagem(int autorId, string conteudo)
     {
         using (var connection = new SqlConnection(_connectionString))
         {
             connection.Open();
-            string sql = "INSERT INTO Mensagens (Conteudo) VALUES (@conteudo)";
+            string sql = "INSERT INTO Mensagens (AutorId, Conteudo) VALUES (@autorId, @conteudo)";
             SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@autorId", autorId);
             command.Parameters.AddWithValue("@conteudo", conteudo);
             command.ExecuteNonQuery();
         }
@@ -30,7 +31,7 @@ public class BancoDeDados
         using (var connection = new SqlConnection(_connectionString))
         {
             connection.Open();
-            string sql = "SELECT * FROM Mensagens";
+            string sql = "SELECT m.Id, m.Conteudo, u.Nome AS Autor, m.DataEnvio FROM Mensagens m JOIN Usuarios u ON m.AutorId = u.Id ORDER BY m.DataEnvio DESC";
             SqlCommand command = new SqlCommand(sql, connection);
             using (SqlDataReader reader = command.ExecuteReader())
             {
@@ -38,7 +39,9 @@ public class BancoDeDados
                 {
                     int id = reader.GetInt32(0);
                     string conteudo = reader.GetString(1);
-                    mensagens.Add(new Mensagem(id, conteudo));
+                    string autor = reader.GetString(2);
+                    DateTime dataEnvio = reader.GetDateTime(3);
+                    mensagens.Add(new Mensagem(id, conteudo, autor, dataEnvio));
                 }
             }
         }
