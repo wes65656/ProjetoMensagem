@@ -1,0 +1,42 @@
+# Diretórios de build
+bin/
+obj/
+ 
+# Arquivos de configuração específicos do usuário
+*.user
+*.suo
+*.vscode/
+*.dbmdl
+*.suo
+
+# Arquivos de configuração do IDE
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.log
+
+# Arquivos de backup do sistema
+*.bak
+*.tmp
+
+# Diretórios específicos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configurações do Visual Studio
+.vs/
+.vscode/
+
+# Arquivos de pacote
+*.nupkg
+*.snupkg
+
+# Arquivos de configuração sensível
+appsettings.json
+secrets.json
+
+# Diretórios de cache
+.cache/
+
+# Outros arquivos de configuração
+*.config
